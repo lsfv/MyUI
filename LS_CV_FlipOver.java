@@ -25,6 +25,7 @@ import app.lslibrary.androidHelper.LSCustomViewHelper;
 //具体含义只能大概给出：摄像头旋转，但是先要把画布调整好。让画布处于正确的旋转轴位置。一般是图片的中间，或中上，或中下。
 //不想传递画布，因为想解耦彻底。所以matrix.preTranslate模拟canvas的提前移动。
 //6.再用属性动画。可以把动画放到里面。隐藏实现。
+//7.对于这种立体的旋转，比较方便还是到view里面用canvas和camera来实现。因为需要直面旋转效果。而不是斜眼看他旋转。
 public class LS_CV_FlipOver extends View
 {
     private static int mDefaultSize=300;
@@ -115,7 +116,7 @@ public class LS_CV_FlipOver extends View
         mPaint.setAntiAlias(true);
     }
 
-    private Matrix getRotation(int degreex, int degreey, int degreeZ, PointF CanvasTransferBy)
+    public static Matrix getRotation(int degreex, int degreey, int degreeZ, PointF CanvasTransferBy)
     {
         Matrix matrix=new Matrix();
         Camera camera=new Camera();
